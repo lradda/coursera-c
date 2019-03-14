@@ -16,17 +16,49 @@ int max (int a, int b) {
 }
 
 //Declare your rectangle structure here!
-
+struct rect_tag {
+  int x;
+  int y;
+  int width;
+  int height;
+};
+typedef struct rect_tag rectangle;
 
 rectangle canonicalize(rectangle r) {
   //WRITE THIS FUNCTION
+  if (r.width < 0){
+    r.x = (r.x + r.width);
+    r.width = (r.width * -1);
+  }
+  if (r.height < 0){
+    r.y = (r.y + r.height);
+    r.height = (r.height * -1);
+  }
   return r;
 }
 rectangle intersection(rectangle r1, rectangle r2) {
   //WRITE THIS FUNCTION
+  r1 = canonicalize(r1);
+  r2 = canonicalize(r2);    
+  int x1 = r1.width + r1.x;
+  int y1 = r1.height + r1.y;
+  int x2 = r2.width + r2.x;
+  int y2 = r2.height + r2.y;
+  if ((((r1.x < r2.x) && (x1 < r2.x)) || ((r2.x < r1.x) && (x2 < r1.x))) || (((r1.y < r2.y) && (y1 < r2.y)) || ((r2.y < r1.y) && (y2 < r1.y)))){
+      r1.width = 0;
+      r1.height = 0;
+    }
+  else {
+  r1.x = max(r1.x, r2.x);
+  r1.y = max(r1.y, r2.y);
+  int xi = min(x1, x2);
+  int yi = min(y1, y2);  
+  r1.width = xi - r1.x;
+  r1.height = yi - r1.y;
+  }
   return r1;
 }
-
+  
 //You should not need to modify any code below this line
 void printRectangle(rectangle r) {
   r = canonicalize(r);

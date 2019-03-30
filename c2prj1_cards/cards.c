@@ -68,20 +68,28 @@ card_t card_from_letters(char value_let, char suit_let) {
   switch (value_let){
   case '2':
     value_let = 2;
+    break;
   case '3':
     value_let = 3;
+    break;
   case '4':
     value_let = 4;
+    break;
   case '5':
     value_let = 5;
+    break;
   case '6':
     value_let = 6;
+    break;
   case '7':
     value_let = 7;
+    break;
   case '8':
     value_let = 8;
+    break;
   case '9':
     value_let = 9;
+    break;
   case '0':
     value_let = 10;
     break;

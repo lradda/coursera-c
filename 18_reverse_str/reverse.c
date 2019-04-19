@@ -4,6 +4,26 @@
 
 void reverse(char * str) {
   //WRITE ME!
+  if (str == NULL){
+    return;
+  }
+  int x = 0;
+  char * p = str;
+  while (*p != '\0'){
+    x++;
+    p++;
+  }
+  char tempString[x];
+  for (int i = 0; i < x; i++){
+    tempString[i] = str[x - 1 - i];
+  }
+  char * p1 = str;
+  char * p2 = tempString;
+  while (*p1 != '\0'){
+    *p1 = *p2;
+    p1++;
+    p2++;
+  }
 }
 
 int main(void) {

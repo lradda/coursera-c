@@ -82,7 +82,6 @@ int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n){
   unsigned temp = hand->cards[index]->value;
   switch (fs) {
   case 4:
-    //for (int i = 1; i < n; i++){
       for (int j = index + 1; j < hand->n_cards; j++){
 	if (hand->cards[j]->value == temp){
 	  continue;
@@ -94,7 +93,6 @@ int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n){
       }
       break;
   default:
-    //for (int i = 1; i < n; i++){
       for (int j = index + 1; j < hand->n_cards; j++){
 	if (hand->cards[j]->value == temp){
 	  continue;
@@ -110,29 +108,7 @@ int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n){
   }
   return 1;
 }
-    
- 
-//unsigned array[n];
-// array[0] = hand->cards[index]->value;
-//int temp = index; 
-//for (int i = 1; i < n; i++){
-//  for (int j = temp; j < hand->n_cards - 1; j++){
-//    if (((fs != NUM_SUITS) && (hand->cards[j]->value != fs)) || (hand->cards[j]->value == hand->cards[j+1]->value)){
-//    continue;
-//    }
-//    array[i] = hand->cards[j+1]->value;
-//    temp = j + 1;
-//    break;
-//  }
-//}
-//for (int k = 0; k < n - 1; k++){
-//  if ((array[k] - array[k+1] != 1) || ((fs != NUM_SUITS) && (hand->cards[array[k]]->suit != fs))){
-//    return 1;
-//  }
-//}
-//return 0;
-//}    
-  
+      
 int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs){
   for (int i = 1; i < hand->n_cards; i++){
     if (hand->cards[i]->value == 5){
@@ -147,16 +123,6 @@ int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs){
 int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
   if (hand->cards[index]->value == 14){    
     if (is_ace_low_straight_at(hand, index, fs) == 0){
-      //if (index == 0){
-      //if (is_n_length_straight_at(hand, 1, fs, 5) == 0){
-      //return 1;
-      //}
-      //}
-      //if (index == 1){
-      //if (is_n_length_straight_at(hand, 2, fs, 5) == 0){
-      // return 1;
-      //}
-      //}
       return -1;
     }
   }
@@ -175,11 +141,10 @@ hand_eval_t build_hand_from_match(deck_t * hand,
   for (int z = 0; z < 5; z++){
     ans.cards[z] = 0;
   }
-  //int array[7] = {0};
-  int array[7] = {0};
-  //for (int m = 0; m < hand->n_cards; m++){
-  //array[m] = {0};
-  //}
+  int array[hand->n_cards];
+  for (int m = 0; m < hand->n_cards; m++){
+    array[m] = 0;
+  }
   int counter = 0;
   for (int i = 0; i < n; i++){
     ans.cards[i] = hand->cards[idx + i];
@@ -211,7 +176,7 @@ int compare_hands(deck_t * hand1, deck_t * hand2) {
   }
   if (resultHand1.ranking == resultHand2.ranking){
     for (int i = 0; i < hand1->n_cards; i++){
-      if (hand1->cards[i]->value > hand2->cards[i]->value){
+      if (hand1->cards[i]->value < hand2->cards[i]->value){
 	return -1;
       }
       if (hand1->cards[i]->value > hand2->cards[i]->value){

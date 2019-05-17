@@ -175,14 +175,11 @@ int compare_hands(deck_t * hand1, deck_t * hand2) {
     return -1;
   }
   if (resultHand1.ranking == resultHand2.ranking){   
-    for (int i = 0; i < hand1->n_cards; i++){
-      if (hand1->cards[i]->value == hand2->cards[i]->value){
-	continue;
-      }	  
-      if (hand1->cards[i]->value < hand2->cards[i]->value){
+    for (int i = 0; i < 5; i++){	  
+      if (resultHand1.cards[i]->value < resultHand2.cards[i]->value){
 	return -1;
       }
-      if (hand1->cards[i]->value > hand2->cards[i]->value){
+      if (resultHand1.cards[i]->value > resultHand2.cards[i]->value){
 	return 1;
       }
     }

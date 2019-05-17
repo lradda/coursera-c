@@ -173,7 +173,7 @@ hand_eval_t build_hand_from_match(deck_t * hand,
   hand_eval_t ans;
   ans.ranking = what;
   //int array[7] = {0};
-  int array[7];
+  int array[7] = {0};
   //for (int m = 0; m < hand->n_cards; m++){
   //array[m] = {0};
   //}

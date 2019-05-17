@@ -78,31 +78,34 @@ ssize_t  find_secondary_pair(deck_t * hand,
 }
 
 int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n){
+  if ((fs != NUM_SUITS) && (hand->cards[index]->suit != fs)){
+    return 1;
+  }
   int counter = 1;
   unsigned temp = hand->cards[index]->value;
   switch (fs) {
   case 4:
-      for (int j = index + 1; j < hand->n_cards; j++){
-	if (hand->cards[j]->value == temp){
-	  continue;
-	}
-        if (hand->cards[j]->value == temp - 1){
-	  counter += 1;
-  	  temp = hand->cards[j]->value;
-	}
+    for (int j = index + 1; j < hand->n_cards; j++){
+      if (hand->cards[j]->value == temp){
+	continue;
       }
-      break;
-  default:
-      for (int j = index + 1; j < hand->n_cards; j++){
-	if (hand->cards[j]->value == temp){
-	  continue;
-	}
-	if ((hand->cards[j]->value == temp - 1) && (hand->cards[j]->suit == fs)){
-	  counter += 1;
-	  temp = hand->cards[j]->value;;
-	}
+      if (hand->cards[j]->value == temp - 1){
+	counter += 1;
+	temp = hand->cards[j]->value;
       }
     }
+    break;
+  default:
+    for (int j = index + 1; j < hand->n_cards; j++){
+      if (hand->cards[j]->value == temp){
+	continue;
+      }
+      if ((hand->cards[j]->value == temp - 1) && (hand->cards[j]->suit == fs)){
+	counter += 1;
+	temp = hand->cards[j]->value;;
+      }
+    }
+  }
   if (counter >= n){
     return 0;
   }

@@ -32,18 +32,22 @@ int main (int argc, char ** argv){
   int key = 0;
   for (int i = 0; i < 26; i++){
     letterCount[i] = freqCount(i, f);
+    //printf("%d\n", letterCount[i]);
   }
+  int temp = -1;
   int mostCommon = 0;
   for (int j = 0; j < 26; j++){
-    if (letterCount[j] > mostCommon){
+    if (letterCount[j] > temp){
 	mostCommon = j;
+	temp = letterCount[j];
       }
   }
+  //printf("%d\n", mostCommon);
   if (mostCommon > 4){
     key = mostCommon - 4;
   }
-  if ((mostCommon < 4) && (mostCommon != 0)){
-    key = 26 - (4 -mostCommon);
+  if ((mostCommon < 4) && (mostCommon != 4)){
+    key = 26 - 4 + mostCommon;
   }
   printf ("%d\n", key);
   return EXIT_SUCCESS;

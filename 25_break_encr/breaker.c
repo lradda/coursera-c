@@ -43,7 +43,7 @@ int main (int argc, char ** argv){
     key = mostCommon - 4;
   }
   if ((mostCommon < 4) && (mostCommon != 0)){
-    key = 26 - mostCommon;
+    key = 26 - (4 -mostCommon);
   }
   printf ("%d\n", key);
   return EXIT_SUCCESS;

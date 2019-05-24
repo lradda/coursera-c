@@ -2,6 +2,19 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+//int freqCount (int letterNumber, FILE * f){
+// char c = fgetc(f);
+//  char currentLetter = c;
+//  int counter = 1;
+//  while ((c = fgetc(f)) != EOF){
+//    if (isalpha(c)){
+//     c = tolower(c);
+//      if (c == currentLetter){
+//	counter += 1;
+//      }
+//      if (c != currentLetter){
+
+
 int freqCount(int letterNumber, FILE * f){
   char c;
   int counter = 0;
@@ -20,7 +33,7 @@ int freqCount(int letterNumber, FILE * f){
  
 int main (int argc, char ** argv){
   if (argc != 2){
-    fprintf(stderr, "Usage: encrypt key inputFileName\n");
+    fprintf(stderr, "ppppUsage: encrypt key inputFileName\n");
     return EXIT_FAILURE;
   }
   FILE * f = fopen(argv[1], "r");
@@ -28,9 +41,9 @@ int main (int argc, char ** argv){
     perror("Could not open file");
     return EXIT_FAILURE;
   }
-  int letterCount = 0;
-  int maxCount = 0;
-  int index = 0;
+  int letterCount;
+  int maxCount;
+  int index;
   //array
   int key = 0;
   for (int i = 0; i < 26; i++){

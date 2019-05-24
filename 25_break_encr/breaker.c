@@ -28,26 +28,32 @@ int main (int argc, char ** argv){
     perror("Could not open file");
     return EXIT_FAILURE;
   }
-  int letterCount[26] = {0};
+  int letterCount = 0;
+  int maxCount = 0;
+  int index = 0;
+  //array
   int key = 0;
   for (int i = 0; i < 26; i++){
-    letterCount[i] = freqCount(i, f);
-    //printf("%d\n", letterCount[i]);
+    letterCount = freqCount(i, f);
+    if (letterCount > maxCount){
+      index = i;
+      maxCount = letterCount;
+    }
+    //letterCount[i] = freqCount(i, f);
   }
-  int temp = -1;
-  int mostCommon = 0;
-  for (int j = 0; j < 26; j++){
-    if (letterCount[j] > temp){
-	mostCommon = j;
-	temp = letterCount[j];
-      }
+  //int temp = -1;
+  //int mostCommon = 0;
+  //for (int j = 0; j < 26; j++){
+  //  if (letterCount[j] > temp){
+  //mostCommon = j;
+  //	temp = letterCount[j];
+  //  }
+  //}
+  if (index > 4){
+    key = index - 4;
   }
-  //printf("%d\n", mostCommon);
-  if (mostCommon > 4){
-    key = mostCommon - 4;
-  }
-  if ((mostCommon < 4) && (mostCommon != 4)){
-    key = 26 - 4 + mostCommon;
+  if ((index < 4) && (index != 4)){
+    key = 26 - 4 + index;
   }
   printf ("%d\n", key);
   return EXIT_SUCCESS;

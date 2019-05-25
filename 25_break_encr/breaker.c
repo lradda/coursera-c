@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+
 int freqCount (FILE * f){
   int array[26] = {0};
   char c;
@@ -48,25 +49,8 @@ int freqCount (FILE * f){
   }
   return largestIndex;
 }
-	
 
 
-//int freqCount(int letterNumber, FILE * f){
-//  char c;
-//  int counter = 0;
-//  char letter = ('a' + letterNumber);
-//  while ((c = fgetc(f)) != EOF){
-//    if (isalpha(c)){
-//      c = tolower(c);
-//      if (c == letter){
-//	  counter += 1;
-//	}
-//    }
-//  }
-//  rewind(f);
-//  return counter;
-//}      
- 
 int main (int argc, char ** argv){
   if (argc != 2){
     fprintf(stderr, "Usage: encrypt key inputFileName\n");
@@ -77,27 +61,8 @@ int main (int argc, char ** argv){
     perror("Could not open file");
     return EXIT_FAILURE;
   }
-  //int letterCount;
-  //int maxCount;
   int index = freqCount(f);
-  //array
   int key = 0;
-  //for (int i = 0; i < 26; i++){
-  //letterCount = freqCount(i, f);
-  //if (letterCount > maxCount){
-  //  index = i;
-  //  maxCount = letterCount;
-  // }
-    //letterCount[i] = freqCount(i, f);
-  //}
-  //int temp = -1;
-  //int mostCommon = 0;
-  //for (int j = 0; j < 26; j++){
-  //  if (letterCount[j] > temp){
-  //mostCommon = j;
-  //	temp = letterCount[j];
-  //  }
-  //}
   if (index > 4){
     key = index - 4;
   }

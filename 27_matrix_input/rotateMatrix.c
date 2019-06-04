@@ -8,21 +8,18 @@ int writeMatrix(FILE * f, char array[10][11]){
   for (int j = 0; j < 10; j++){
     for (int i = 0; i <= 10; i++){
       if ((c = fgetc(f)) == EOF){
-	perror( "File is too short");
-	return EXIT_FAILURE;       
+	return 1;       
       }
       if ((i < 10) && (c == 10)){
-	perror("Line is too short");
-	return EXIT_FAILURE;
+	return 2;
       }
       array[j][i] = c;
     }       
   }
   if ((c = fgetc(f)) != EOF){
-    perror("File is too long");
-    return EXIT_FAILURE;
+    return 3;
   }
-  return EXIT_SUCCESS;
+  return 0;
 }  
 
 void rotate(char array[10][11]){
@@ -51,7 +48,19 @@ int main(int argc, char ** argv){
     return EXIT_FAILURE;
   }
   char array[10][11];
-  writeMatrix(f, array);
+  int x = writeMatrix(f, array);
+  if (x == 1){
+    perror( "File is too short");
+    return EXIT_FAILURE;
+  }
+  if (x == 2){
+    perror("Line is too short");
+    return EXIT_FAILURE;
+  }
+  if (x == 3){
+    perror("File is too long");
+    return EXIT_SUCCESS;
+  } 
   rotate(array);
   for (int i = 0; i < 10; i++){
     for (int j = 0; j <= 10; j++){

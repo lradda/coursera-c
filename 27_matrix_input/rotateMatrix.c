@@ -61,7 +61,7 @@ int main(int argc, char ** argv){
 	fprintf(stderr, "Line is too short\n");
 	return EXIT_FAILURE;
       }
-      if ((i = 10) && (c != 10)){
+      if ((i == 10) && (c != 10)){
 	fprintf(stderr, "Line is too long\n");
 	return EXIT_FAILURE;
       }				  

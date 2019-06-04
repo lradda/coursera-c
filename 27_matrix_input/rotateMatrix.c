@@ -7,17 +7,17 @@ void writeMatrix(FILE * f, char array[10][11]){
   char c;
   for (int j = 0; j < 10; j++){
     for (int i = 0; i <= 10; i++){
-      //if ((c = fgetc(f)) != EOF){
-      c = fgetc(f);
-      //if (c == 10){
-      //continue;
-      //}
-	array[j][i] = c;
-	//printf("%d %d\n", i, j);
-	//printf("%c", c);
-	//printf("%c\n", array[j][i]); 
-	//}
+      if ((c = fgetc(f)) == EOF){
+	perror("File is too short");
+      }
+      if ((i < 10) && (c == 10)){
+	perror("Line is too short");
+      }
+      array[j][i] = c;
     }       
+  }
+  if ((c = fgetc(f)) != EOF){
+    perror("File is too long");
   }
 }  
 
@@ -25,10 +25,7 @@ void rotate(char array[10][11]){
   char arrayTemp[10][11];
   for (int j = 0; j < 10; j++){
     for (int i = 0; i < 10; i++){
-      //printf("%c", array[j][i]);
       arrayTemp[j][i] = array[9-i][j];
-      //printf("%c", arrayTemp[j][i]);
-
     }
     arrayTemp[j][10] = array[j][10];
   }
@@ -51,13 +48,6 @@ int main(int argc, char ** argv){
   }
   char array[10][11];
   writeMatrix(f, array);
-  //test
-  //for (int i = 0; i < 10; i++){
-  //for (int j = 0; j <= 10; j++){
-  //  printf("%c", array[i][j]);
-  //}
-  //}
-//test
   rotate(array);
   for (int i = 0; i < 10; i++){
     for (int j = 0; j <= 10; j++){

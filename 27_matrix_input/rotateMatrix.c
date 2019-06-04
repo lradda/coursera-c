@@ -3,24 +3,24 @@
 #include <stdint.h>
 #include <ctype.h>
 
-int writeMatrix(FILE * f, char array[10][11]){
-  char c;
-  for (int j = 0; j < 10; j++){
-    for (int i = 0; i <= 10; i++){
-      if ((c = fgetc(f)) == EOF){
-	return 1;       
-      }
-      if ((i < 10) && (c == 10)){
-	return 2;
-      }
-      array[j][i] = c;
-    }       
-  }
-  if ((c = fgetc(f)) != EOF){
-    return 3;
-  }
-  return 0;
-}  
+//int writeMatrix(FILE * f, char array[10][11]){
+//  char c;
+//  for (int j = 0; j < 10; j++){
+//    for (int i = 0; i <= 10; i++){
+//      if ((c = fgetc(f)) == EOF){
+//	return 1;       
+//     }
+//      if ((i < 10) && (c == 10)){
+//	return 2;
+//      }
+//      array[j][i] = c;
+//    }       
+//  }
+//  if ((c = fgetc(f)) != EOF){
+//    return 3;
+//  }
+//  return 0;
+//}  
 
 void rotate(char array[10][11]){
   char arrayTemp[10][11];
@@ -48,18 +48,35 @@ int main(int argc, char ** argv){
     return EXIT_FAILURE;
   }
   char array[10][11];
-  int x = writeMatrix(f, array);
-  if (x == 1){
-    fprintf(stderr, "File is too short");
-    return EXIT_FAILURE;
+  char c;
+  for (int j = 0; j < 10; j++){
+    for (int i = 0; i <= 10; i++){
+      if ((c = fgetc(f)) == EOF){
+	fprintf(stderr, "File is too short\n");
+	return EXIT_FAILURE;
+      }
+      if ((i < 10) && (c == 10)){
+	fprintf(stderr, "Line is too short\n");
+	return EXIT_FAILURE;
+      }
+      array[j][i] = c;
+    }       
   }
-  if (x == 2){
-    fprintf(stderr, "Line is too short");
+  if ((c = fgetc(f)) != EOF){
+    fprintf(stderr, "File is too long\n");
     return EXIT_FAILURE;
-  }
-  if (x == 3){
-    fprintf(stderr, "File is too long");
-    return EXIT_SUCCESS;
+  //  int x = writeMatrix(f, array);
+  //if (x == 1){
+  //  fprintf(stderr, "File is too short\n");
+  //  return EXIT_FAILURE;
+  //}
+  //if (x == 2){
+  //  fprintf(stderr, "Line is too short\n");
+  //  return EXIT_FAILURE;
+  //}
+  //if (x == 3){
+  //   fprintf(stderr, "File is too long\n");
+  // return EXIT_SUCCESS;
   } 
   rotate(array);
   for (int i = 0; i < 10; i++){

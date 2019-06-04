@@ -50,7 +50,7 @@ int main(int argc, char ** argv){
     return EXIT_FAILURE;
   }
   char array[10][11];
-  char c;
+  int c;
   for (int j = 0; j < 10; j++){
     for (int i = 0; i <= 10; i++){
       if ((c = fgetc(f)) == EOF){

@@ -3,22 +3,26 @@
 #include <stdint.h>
 #include <ctype.h>
 
-void writeMatrix(FILE * f, char array[10][11]){
+int writeMatrix(FILE * f, char array[10][11]){
   char c;
   for (int j = 0; j < 10; j++){
     for (int i = 0; i <= 10; i++){
       if ((c = fgetc(f)) == EOF){
-	perror("File is too short");
+	perror( "File is too short");
+	return EXIT_FAILURE;       
       }
       if ((i < 10) && (c == 10)){
 	perror("Line is too short");
+	return EXIT_FAILURE;
       }
       array[j][i] = c;
     }       
   }
   if ((c = fgetc(f)) != EOF){
     perror("File is too long");
+    return EXIT_FAILURE;
   }
+  return EXIT_SUCCESS;
 }  
 
 void rotate(char array[10][11]){

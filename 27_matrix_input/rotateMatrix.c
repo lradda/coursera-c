@@ -50,15 +50,15 @@ int main(int argc, char ** argv){
   char array[10][11];
   int x = writeMatrix(f, array);
   if (x == 1){
-    perror( "File is too short");
+    fprintf(stderr, "File is too short");
     return EXIT_FAILURE;
   }
   if (x == 2){
-    perror("Line is too short");
+    fprintf(stderr, "Line is too short");
     return EXIT_FAILURE;
   }
   if (x == 3){
-    perror("File is too long");
+    fprintf(stderr, "File is too long");
     return EXIT_SUCCESS;
   } 
   rotate(array);

@@ -37,6 +37,8 @@ void rotate(char array[10][11]){
   }  
 }
 
+
+
 int main(int argc, char ** argv){
   if (argc != 2){
     fprintf(stderr, "Usage: encrypt key inputFileName\n");
@@ -59,6 +61,10 @@ int main(int argc, char ** argv){
 	fprintf(stderr, "Line is too short\n");
 	return EXIT_FAILURE;
       }
+      if ((i = 10) && (c != 10)){
+	fprintf(stderr, "Line is too long\n");
+	return EXIT_FAILURE;
+      }				  
       array[j][i] = c;
     }       
   }

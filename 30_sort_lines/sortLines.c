@@ -39,7 +39,7 @@ void preSort(FILE * f){
 int main(int argc, char ** argv) {
   if (argc == 1){
     preSort(stdin);
-    printf("Input successfully sorted\n");
+    //printf("Input successfully sorted\n");
     return EXIT_SUCCESS;
   }
   for (int i = 1; i < argc; i++){

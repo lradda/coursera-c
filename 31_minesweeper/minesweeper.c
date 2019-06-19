@@ -41,9 +41,26 @@ void addRandomMine(board_t * b) {
 }
 
 board_t * makeBoard(int w, int h, int numMines) {
-  //WRITE ME!
-  return NULL;
+  board_t * b = malloc(sizeof(*b));
+  b->width = w;
+  b->height = h;
+  b->totalMines = numMines;
+  b->board = malloc(b->height * (sizeof(*b->board)));
+  for (int i = 0; i < b->height; i++){
+    b->board[i] = malloc(b->width * (sizeof(*b->board[i])));
+  }    		    
+  for (int y = 0; y < b->height; y++){
+    for (int x = 0; x < b->width; x++){
+      b->board[y][x] = UNKNOWN;
+    }
+  }
+  for (int j = 0; j < b->totalMines; j++){
+    addRandomMine(b);
+  }
+  return b;
+  //return NULL;
 }
+
 void printBoard(board_t * b) {    
   int found = 0;
   printf("    ");
@@ -94,10 +111,39 @@ void printBoard(board_t * b) {
   }
   printf("\nFound %d of %d mines\n", found, b->totalMines);
 }
+
 int countMines(board_t * b, int x, int y) {
-  //WRITE ME!
-  return 0;
+  int xmin = 1;
+  int xmax = 1;
+  int ymin = 1;
+  int ymax = 1;
+  int count = 0;
+  if (y == 0){
+    ymin -= 1;
+  }
+  if (x == 0){
+    xmin -= 1;
+  }
+  if (y == b->height - 1){
+    ymax -= 1;
+  }
+  if (x == b->width -1){
+    xmax -= 1;
+  }  
+  for (int i = (y - ymin); i <= (y + ymax); i++){
+    for (int j = (x - xmin); j <= (x + xmax); j++){
+      if ((i == y) && ((j == x))){
+	continue;
+      }
+      if (IS_MINE(b->board[i][j])){
+	count += 1;
+      }
+    }
+  }
+  return count;
+  //return 0;
 }
+
 int click (board_t * b, int x, int y) {
   if (x < 0 || x >= b->width ||
       y < 0 || y >= b->height) {
@@ -118,12 +164,22 @@ int click (board_t * b, int x, int y) {
 }
 
 int checkWin(board_t * b) {
-  //WRITE ME!
-  return 0;
+  for (int y = 0; y < b->height; y++){
+    for (int x = 0; x < b->width; x++){
+      if (b->board[y][x] == UNKNOWN){
+	return 0;
+      }
+    }
+  }
+  return 1;
 }
 
 void freeBoard(board_t * b) {
-  //WRITE ME!
+  for (int i = 0; i < b->width; i++){
+    free(b->board[i]);
+  }    		    
+  free(b->board);
+  free(b);
 }
 
 int readInt(char ** linep, size_t * lineszp) {
